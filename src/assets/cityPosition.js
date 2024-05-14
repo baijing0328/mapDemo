@@ -1,4 +1,4 @@
-const positionArr = [
+export const positionArr = [
     { name: '北京', value: ['116.3979471', '39.9081726'] },
     { name: '上海', value: ['121.4692688', '31.2381763'] },
     { name: '天津', value: ['117.2523808', '39.1038561'] },

@@ -1,13 +1,11 @@
-<script lang="ts" setup>
-import { ref } from 'vue'
-</script>
+<script lang="ts" setup></script>
 
 <template>
   <el-card class="main-card">
     <template #header>
       <el-row justify="space-between">
         <el-col :span="4">
-          <span class="head-span">异常用户列表</span>
+          <span class="head-span">地图Demo</span>
         </el-col>
       </el-row>
     </template>
