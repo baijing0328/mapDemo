@@ -10,7 +10,6 @@ import MapDemo from './views/mapDemo.vue'
       <head-container height="72px" />
     </el-header>
     <el-main class="main">
-      <!-- <main-container /> -->
       <map-demo />
     </el-main>
   </el-container>
