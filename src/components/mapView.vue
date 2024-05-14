@@ -67,9 +67,9 @@ function drawChina() {
       //省份地图添加背景
       regions: regions,
       itemStyle: {
-        areaColor: '#cafffd',
-        color: 'white',
-        borderColor: '#fefeff',
+        areaColor: '#0b122e',
+        color: 'red',
+        borderColor: '#232652',
         borderWidth: 2
       },
       //高亮状态
@@ -123,8 +123,7 @@ function drawChina() {
 
 <style>
 .chinaMap {
-  height: 100%;
-
+  height: 700px;
   width: 100%;
 }
 </style>
