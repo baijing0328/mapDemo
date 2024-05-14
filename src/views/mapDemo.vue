@@ -9,7 +9,14 @@
         </el-col>
       </el-row>
     </template>
-    <map-view />
+    <el-row>
+      <el-col :span="20">
+        <map-view />
+      </el-col>
+      <el-col :span="4">
+        <div>1111</div>
+      </el-col>
+    </el-row>
   </el-card>
 </template>
 

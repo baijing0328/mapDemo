@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue'
 import * as echarts from 'echarts'
 import chinaJSON from '../assets/json/china.json'
-import cityJSON from '../assets/json/city.json'
+import cityJSON from '../assets/json/cityPos.json'
 import { positionArr } from '../assets/cityPosition'
 
 const chinaMap = ref()
