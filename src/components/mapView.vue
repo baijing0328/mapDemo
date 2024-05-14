@@ -2,44 +2,15 @@
 import { onMounted, ref } from 'vue'
 import * as echarts from 'echarts'
 import chinaJSON from '../assets/json/china.json'
+import cityJSON from '../assets/json/city.json'
 import { positionArr } from '../assets/cityPosition'
 
 const chinaMap = ref()
 
 onMounted(() => {
   drawChina()
+  console.log(cityJSON)
 })
-
-// let regions = [
-//   {
-//     name: '新疆维吾尔自治区',
-//     itemStyle: {
-//       areaColor: '#374ba4',
-//       opacity: 1
-//     }
-//   },
-//   {
-//     name: '四川省',
-//     itemStyle: {
-//       areaColor: '#fe9b45',
-//       opacity: 1
-//     }
-//   },
-//   {
-//     name: '陕西省',
-//     itemStyle: {
-//       areaColor: '#fd691b',
-//       opacity: 1
-//     }
-//   },
-//   {
-//     name: '黑龙江省',
-//     itemStyle: {
-//       areaColor: '#ffc556',
-//       opacity: 1
-//     }
-//   }
-// ]
 
 function drawChina() {
   let myChart = echarts.init(chinaMap.value)
