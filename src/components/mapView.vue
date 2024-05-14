@@ -32,13 +32,13 @@ function drawChina() {
       itemStyle: {
         areaColor: '#f8f9f6',
         color: 'red',
-        borderColor: '#232652',
-        borderWidth: 1
+        borderColor: '#c8c9cc',
+        borderWidth: 0.5
       },
       //高亮状态
       emphasis: {
         itemStyle: {
-          areaColor: '#1af9e5',
+          areaColor: '#d9ecff',
           color: '#fff'
         }
       }
@@ -65,7 +65,7 @@ function drawChina() {
       itemStyle: {
         //图形样式，normal 是图形在默认状态下的样式；emphasis 是图形在高亮状态下的样式，比如在鼠标悬浮或者图例联动高亮时
         normal: {
-          color: '#002FA7', //散点的颜色
+          color: '#79bbff', //散点的颜色
           shadowBlur: 5,
           shadowColor: 5,
           fontSize: '5px'

@@ -9,12 +9,12 @@
         </el-col>
       </el-row>
     </template>
-    <el-row>
-      <el-col :span="20">
+    <el-row :gutter="20">
+      <el-col :span="16">
         <map-view />
       </el-col>
-      <el-col :span="4">
-        <div>1111</div>
+      <el-col :span="8">
+        <find-city />
       </el-col>
     </el-row>
   </el-card>

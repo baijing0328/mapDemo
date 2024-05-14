@@ -1,4 +1,10 @@
 export const city = [
+    { value: '北京市', label: '北京市' },
+    { value: '天津市', label: '天津市' },
+    { value: '上海市', label: '上海市' },
+    { value: '重庆市', label: '重庆市' },
+    { value: '香港特别行政区', label: '香港特别行政区' },
+    { value: '澳门特别行政区', label: '澳门特别行政区' },
     {
         value: '河北省',
         label: '河北省',
@@ -1620,3 +1626,7 @@ export const city = [
         ]
     }
 ]
+
+export const formatCity = (city) => {
+
+}
