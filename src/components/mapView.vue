@@ -11,7 +11,8 @@ const linesData = ref([
   {
     coords: [
       [116.407387, 39.904179],
-      [117.126399, 36.656554]
+      [117.126399, 36.656554],
+      [113.271431, 23.135336]
     ]
   } // 北京->广东
 ])
@@ -55,18 +56,11 @@ function drawChina() {
     //配置属性
     series: [
       {
-        type: 'effectScatter',
+        type: 'scatter',
         coordinateSystem: 'geo',
-        // data: positionArr,
-        data: [],
-        showEffectOn: 'render',
-        // rippleEffect: {
-        //   //涟漪特效相关配置
-        //   brushType: 'fill' //波纹的绘制方式，可选 'stroke' 和 'fill'
-        // },
-        hoverAnimation: false, //是否开启鼠标 hover 的提示动画效果
+        data: positionArr,
+        symbolSize: 5,
         label: {
-          //图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等，
           normal: {
             formatter: '{b}',
             position: 'right',
@@ -74,11 +68,9 @@ function drawChina() {
           }
         },
         itemStyle: {
-          //图形样式，normal 是图形在默认状态下的样式；emphasis 是图形在高亮状态下的样式，比如在鼠标悬浮或者图例联动高亮时
+          //图形样式，normal 是图形在默认状态下的样式
           normal: {
-            color: '#79bbff', //散点的颜色
-            shadowBlur: 5,
-            shadowColor: 5,
+            color: '#337ecc', //散点的颜色
             fontSize: '5px'
           }
         },
@@ -88,16 +80,15 @@ function drawChina() {
         // 线条系列数据
         type: 'lines',
         zlevel: 2,
+        polyline: true,
         symbol: ['none', 'arrow'], // 标记的图形: 箭头
         symbolSize: 10, // 标记的大小
         lineStyle: {
-          // 线条样式
-          normal: {
-            color: '#93EBF8',
-            width: 2.5, // 线条宽度
-            opacity: 0.6, // 尾迹线条透明度
-            curveness: 0.2 // 尾迹线条曲直度
-          }
+          color: '#337ecc',
+          width: 2, // 线条宽度
+          opacity: 0.6, // 尾迹线条透明度
+          curveness: 1, // 尾迹线条曲直度
+          join: 'round'
         },
         data: linesData.value
       }
