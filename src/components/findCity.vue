@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import { Delete } from '@element-plus/icons-vue'
 import { city } from '../utils'
 
 const options = city
@@ -25,7 +24,6 @@ const addDomain = () => {
 }
 
 const submitForm = (formEl) => {
-  console.log(111)
   if (!formEl) return
   formEl.validate((valid) => {
     if (valid) {
