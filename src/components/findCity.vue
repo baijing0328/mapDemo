@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import { city } from '../utils'
+import { city } from '@/utils'
 
 const options = city
 const formRef = ref()

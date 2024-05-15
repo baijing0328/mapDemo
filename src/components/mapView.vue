@@ -1,25 +1,18 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import * as echarts from 'echarts'
-import chinaJSON from '../assets/json/china.json'
-import cityJSON from '../assets/json/cityPos.json'
-import { positionArr } from '../assets/cityPosition'
+import chinaJSON from '@/assets/json/china.json'
+import cityJSON from '@/assets/json/cityPos.json'
+import { positionArr } from '@/assets/cityPosition'
+import { usePathStore } from '@/stores/path'
 
 const chinaMap = ref()
 
-const linesData = ref([
-  {
-    coords: [
-      [116.407387, 39.904179],
-      [117.126399, 36.656554],
-      [113.271431, 23.135336]
-    ]
-  } // 北京->广东
-])
+const pathStore = usePathStore()
 
 onMounted(() => {
   drawChina()
-  console.log(cityJSON)
+  console.log(pathStore)
 })
 
 function drawChina() {
@@ -90,7 +83,7 @@ function drawChina() {
           curveness: 1, // 尾迹线条曲直度
           join: 'round'
         },
-        data: linesData.value
+        data: pathStore.path
       }
     ]
   }
