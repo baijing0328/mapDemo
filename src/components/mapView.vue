@@ -58,7 +58,7 @@ function drawChina(path, province, city) {
       {
         type: 'scatter',
         coordinateSystem: 'geo',
-        data: province,
+        data: [...province, ...city],
         symbolSize: 5,
         label: {
           normal: {
