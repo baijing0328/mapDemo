@@ -1626,7 +1626,3 @@ export const city = [
         ]
     }
 ]
-
-export const formatCity = (city) => {
-
-}

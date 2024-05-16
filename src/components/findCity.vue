@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
+import { usePathStore } from '@/stores/path'
 import { city } from '@/utils'
 
 const options = city
 const formRef = ref()
+const pathStore = usePathStore()
 const cityForm = reactive({
   domains: [{ key: 1, value: '' }],
   beginCity: '',
@@ -27,7 +29,7 @@ const submitForm = (formEl) => {
   if (!formEl) return
   formEl.validate((valid) => {
     if (valid) {
-      console.log(cityForm)
+      pathStore.findCityPath(cityForm)
     } else {
       console.log('error submit!')
     }

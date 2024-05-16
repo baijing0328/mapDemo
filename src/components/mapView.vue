@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import * as echarts from 'echarts'
 import chinaJSON from '@/assets/json/china.json'
-import cityJSON from '@/assets/json/cityPos.json'
-import { positionArr } from '@/assets/cityPosition'
 import { usePathStore } from '@/stores/path'
+import { useProvinceStore } from '@/stores/province'
 
 const chinaMap = ref()
 
 const pathStore = usePathStore()
+const provinceStore = useProvinceStore()
 
 onMounted(() => {
   drawChina()
@@ -51,7 +51,7 @@ function drawChina() {
       {
         type: 'scatter',
         coordinateSystem: 'geo',
-        data: positionArr,
+        data: provinceStore.province,
         symbolSize: 5,
         label: {
           normal: {
