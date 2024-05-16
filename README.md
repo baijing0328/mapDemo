@@ -1,35 +1,142 @@
-# vue-project
+### 一、项目运行
 
-This template should help get you started developing with Vue 3 in Vite.
+1. `npm install` 安装项目依赖
+2. `npm run dev`运行项目
 
-## Recommended IDE Setup
+#### 主要技术
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+1. 数据管理 pinia
+2. 地图绘制  echarts
+3. 组件库 element-plus
 
-## Customize configuration
+> 注：我本地开发用的是pnpm，但我试了一下，npm run dev能跑起来，所以问题应该不大
+>
+> echarts官方文档：https://echarts.apache.org/zh/index.html
+>
+> echarts参考博客：https://blog.csdn.net/interest_ing_/article/details/136753444
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+### 二、项目结构（这一部分大体介绍下）
 
-## Project Setup
+#### 1. api
 
-```sh
-pnpm install
+#### 2. assets
+
+里面主要放了用到的地图数据以及一个全局的css（scss，这个不用管，因为我也抄的黑马程序员的）。
+
+地图数据都在json里面，里面真正的重要的是china.json，这是绘制地图必须用的，其他的两个文件是我自己开发的时候用来mock的数据，你们也可以看看怎么弄，不过既然有数据库的话最好跟数据库里面的数据保持一致
+
+#### 3. components
+
++ findCity.vue
+  + 这个文件是用来查找的，也就是右边那一列上下俩card。form表单只做了一个简单的校验，要求必填
+  + 下面的东西把鼠标放到城市路线上会有一个tooltip，蓝色的tag是上面的form表单输入了的，灰色的理论上来说应该是后端返回的计算出来需要途经的城市
++ mapView.vue
+  + 显示地图的组件
+  + 主要看下里面的drawChina这个函数，里面应该有对应的注释，看不明白的话再来找我
+
+#### 4. stores
+
+这个里面就是用的pinia做的数据状态管理，一个是路径path相关的，一个是城市相关的（这里一开始叫province实际是因为我起错名了，叫city更合适，但改要改引用，懒得弄了）
+
+简单来说path主要相关的是findCity.vue，province主要相关的是mapView
+
+#### 5. utils
+
+就一个文件，city是form表单里级联选择的选项，formatFormCity是城市路线那里显示用到的。cityPosition显示的是各个省会的位置，这个看你们要不要改成从后端获取
+
+#### 6. views
+
+没啥好说的，主要功能不在这，跟总体的布局相关
+
+### 三、咋用
+
+地图上会首先默认显示一个北京-济南-广州的路线，这个是在`@/stores/province.js`里面默认的路线，你们接手的话要改一下为空数组。然后点右边的表单，填写好后点击查询会在地图上显示路线，这个动画有点笨但我没找到怎么改。注意这里实际上也是我自己mock的假数据，涉及到异步请求的部分暂时注释掉了，也在`@/stores/province.js`里面。大体功能就这样子，地图更细的透出，放大后显示地图细节我查了下，还需要找高德或者百度地图的api，懒得弄了。
+
+### 四.我希望的接口文档
+
+#### 一个获取所有省会地址的接口
+
+方法：get
+
+返回数据：
+
+```json
+{
+	"status":xxx
+    "data":{
+    	"cityPosition":[
+    		{ name: '北京市',value: ['116.413384', '39.910925']},
+    		{ name: '天津市',value: ['117.209523', '39.093668']},
+			...,
+			{ name: '台北市',value: ['121.539414', '25.073653']},
+    	]
+	}
+}
 ```
 
-### Compile and Hot-Reload for Development
+> 注：这个其实没那么重要，因为我现在有个写死的数据在utils里，不过要是想跟后端数据库同步的话最好还是发请求，或者强迫后端的城市经纬度用我这个（）
 
-```sh
-pnpm dev
+#### 获取城市路径的接口
+
+方法：post
+
+携带参数：
+
+```json
+{
+	"domains": [
+		{
+			"key": 1,
+			"value": ["黑龙江省","哈尔滨市"]
+		},
+		{
+			"key": 1715856130451,
+			"value": ["河北省","承德市"]
+		}
+	],
+	"beginCity": ["黑龙江省","双鸭山市"],
+	"endCity": ["北京市"]
+}
+```
+beginCity和endCity不用多说吧（）。然后domains对应的数据是中间的途径城市，也就是用户除了目的地之外还想去的地方，这个是个数组（忽略里面的key，是element-plus自动生成的），数组的顺序就是途径城市的顺序
+
+> 因为用的是级联选择器，所以涉及到地级市的话的格式就是一个数组，beginCity[0]就是对应的省份，beginCity[1]就是对应的城市，这里我应该会在utils里写个函数（`formatParams`）用来加工数据，加工后的数据如下（不过真的没有重名的城市吗？）：
+> ```json
+> {
+> 	"domains": ["哈尔滨市"，"承德市"],
+> 	"beginCity": "双鸭山市",
+> 	"endCity": "北京市"
+> }
+> ```
+> 到时候看看后端用哪种类型的数据，来决定调不调函数吧
+
+返回值：
+
+```json
+{
+	"status":xxx
+    "data":{
+            path: [{
+                coords: [
+                    [131.165342, 46.653186],
+                    [130.327359, 46.80569],
+                    [126.541615, 45.808826],
+                    [125.330602, 43.821954],
+                    [123.466452, 41.68879],
+                    [117.969398, 40.957856],
+                    [116.413384, 39.910925],
+                ]
+            }],
+            city: [
+                { name: '双鸭山市', value: ['131.165342', '46.653186'] },
+                { name: '佳木斯市', value: ['130.327359', '46.80569'] },
+                { name: '哈尔滨市', value: ['126.541615', '45.808826'] },
+                { name: '长春市', value: ['125.330602', '43.821954'] },
+                { name: '沈阳市', value: ['123.466452', '41.68879'] },
+                { name: '承德市', value: ['117.969398', '40.957856'] },
+                { name: '北京市', value: ['116.413384', '39.910925'] },
+            ]  
+}
 ```
 
-### Compile and Minify for Production
-
-```sh
-pnpm build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
-```
+> coords用来画路径，City用来显示点，这边要注意下格式，格式错了地图会显示不出来我记得

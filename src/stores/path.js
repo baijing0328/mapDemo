@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import axios from 'axios'
 import { formatFormCity } from '@/utils'
+import { findCityPath } from '@/api'
 
 export const usePathStore = defineStore('path', () => {
     const path = ref(
@@ -23,16 +23,7 @@ export const usePathStore = defineStore('path', () => {
     const formCity = ref([])
     const findCityPath = async (formValue) => {
         console.log(formValue)
-        // await axios.get('http://localhost:3000/path').then((response) => {
-        // formCity.value=formatFormCity(formValue)
-        //     const res = [{
-        //         coords: [
-        //             [131.165342, 46.653186],
-        //             [116.413384, 39.910925]
-        //         ]
-        //     }]
-        //     path.value = res
-        // })
+        // const res = await findCityPath(formValue)
         formCity.value = formatFormCity(formValue)
         const res = {
             path: [{

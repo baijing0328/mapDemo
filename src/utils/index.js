@@ -1760,13 +1760,30 @@ export const cityPosition = [
         value: ['121.539414', '25.073653']
     },
 ]
-export const formatFormCity = (formValue) => {
+//转换
+export const formatParams = (formValue) => {
     const form = JSON.parse(JSON.stringify(formValue))
     const { beginCity, domains, endCity } = form
-    let tempCity = []
+    let tempBegin, tempEnd, tempDomains = []
     if (domains.length > 0) {
-        tempCity = domains.map(item => item.value).flat()
+        tempDomains = domains.map(item => {
+            if (item.value.length > 1) {
+                return item.value[1]
+            }
+            return item.value
+        })
     }
-    const city = [...beginCity, ...tempCity, ...endCity]
+    tempBegin = beginCity.length > 1 ? beginCity[1] : beginCity[0]
+    tempEnd = endCity.length > 1 ? endCity[1] : endCity[0]
+    return {
+        beginCity: tempBegin,
+        domains: tempDomains,
+        endCity: tempEnd
+    }
+}
+
+export const formatFormCity = (formValue) => {
+    const { beginCity, domains, endCity } = formatParams(formValue)
+    const city = [beginCity, ...domains, endCity]
     return city
 }
