@@ -11,11 +11,18 @@ const pathStore = usePathStore()
 const provinceStore = useProvinceStore()
 
 onMounted(() => {
-  drawChina()
+  drawChina(pathStore.path, provinceStore.province, pathStore.city)
   console.log(pathStore)
 })
 
-function drawChina() {
+watch(
+  () => pathStore.path,
+  (val) => {
+    drawChina(val, provinceStore.province, pathStore.city)
+  }
+)
+
+function drawChina(path, province, city) {
   let myChart = echarts.init(chinaMap.value)
   echarts.registerMap('china', chinaJSON) //注册可用的地图
   let option = {
@@ -51,7 +58,7 @@ function drawChina() {
       {
         type: 'scatter',
         coordinateSystem: 'geo',
-        data: provinceStore.province,
+        data: province,
         symbolSize: 5,
         label: {
           normal: {
@@ -60,6 +67,7 @@ function drawChina() {
             show: true
           }
         },
+        large: true,
         itemStyle: {
           //图形样式，normal 是图形在默认状态下的样式
           normal: {
@@ -68,6 +76,22 @@ function drawChina() {
           }
         },
         zlevel: 1
+      },
+      {
+        // 散点系列数据
+        type: 'effectScatter', // 带有涟漪特效动画的散点（气泡）图
+        coordinateSystem: 'geo', //该系列使用的坐标系:地理坐标系
+        effectType: 'ripple',
+        showEffectOn: 'render',
+        rippleEffect: {
+          // 涟漪特效相关配置。
+          period: 10, // 动画的周期，秒数。
+          scale: 2, // 动画中波纹的最大缩放比例。
+          // 波纹的绘制方式，可选 'stroke' 和 'fill'。
+          brushType: 'fill'
+        },
+        zlevel: 1, // 所有图形的 zlevel 值。
+        data: city
       },
       {
         // 线条系列数据
@@ -83,7 +107,7 @@ function drawChina() {
           curveness: 1, // 尾迹线条曲直度
           join: 'round'
         },
-        data: pathStore.path
+        data: path
       }
     ]
   }
@@ -92,15 +116,17 @@ function drawChina() {
 </script>
 
 <template>
-  <div>
+  <el-card shadow="hover" class="mapBody">
     <div ref="chinaMap" class="chinaMap">地图1</div>
-  </div>
+  </el-card>
 </template>
 
 <style>
+.mapBody > el-card__body {
+  padding: 0;
+}
 .chinaMap {
-  height: 700px;
+  height: 650px;
   width: 100%;
-  border: 1px solid #ccc;
 }
 </style>
