@@ -98,8 +98,11 @@ function drawChina(path, province, city) {
         type: 'lines',
         zlevel: 2,
         polyline: true,
-        symbol: ['none', 'arrow'], // 标记的图形: 箭头
-        symbolSize: 10, // 标记的大小
+        //下面这部分动画配置好像在多条线段下不起效？
+        // period: 6, // 特效动画的时间，单位s
+        // trailLength: 0, // 特效尾迹的长度，0-1
+        // symbol: 'circle', // 标记的图形: 箭头
+        // symbolSize: 10, // 标记的大小
         lineStyle: {
           color: '#337ecc',
           width: 2, // 线条宽度
