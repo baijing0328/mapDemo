@@ -11,13 +11,19 @@
 
 > 注：我本地开发用的是pnpm，但我试了一下，npm run dev能跑起来，所以问题应该不大
 >
-> echarts官方文档：https://echarts.apache.org/zh/index.html
+> + echarts官方文档：https://echarts.apache.org/zh/index.html
+>   + lines配置：https://echarts.apache.org/zh/option.html#series-lines
+>   + effectScatter配置：https://echarts.apache.org/zh/option.html#series-effectScatter
+>   + scatter配置：https://echarts.apache.org/zh/option.html#series-scatter
+>   + geo配置：https://echarts.apache.org/zh/option.html#geo
 >
-> echarts参考博客：https://blog.csdn.net/interest_ing_/article/details/136753444
+> + echarts参考博客：https://blog.csdn.net/interest_ing_/article/details/136753444
 
 ### 二、项目结构（这一部分大体介绍下）
 
 #### 1. api
+
+放了俩，不过也是瞎编的，看着调整下吧（）
 
 #### 2. assets
 
@@ -51,6 +57,8 @@
 ### 三、咋用
 
 地图上会首先默认显示一个北京-济南-广州的路线，这个是在`@/stores/province.js`里面默认的路线，你们接手的话要改一下为空数组。然后点右边的表单，填写好后点击查询会在地图上显示路线，这个动画有点笨但我没找到怎么改。注意这里实际上也是我自己mock的假数据，涉及到异步请求的部分暂时注释掉了，也在`@/stores/province.js`里面。大体功能就这样子，地图更细的透出，放大后显示地图细节我查了下，还需要找高德或者百度地图的api，懒得弄了。
+
+> tips：目前级联选择器里面所有的城市都是我从网上找的一个地理数据里面处理出来的，实际上我不清楚是否包括了所有的地级市，这边可能需要你们跟数据库配一下
 
 ### 四.我希望的接口文档
 

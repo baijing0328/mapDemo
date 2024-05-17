@@ -8,11 +8,16 @@ export const getCityPosition = async () => {
 //路径查询
 export const findCityPath = async (formValue) => {
     try {
-        await axios.post('http://localhost:3000/path', formValue).then((response) => {
-            const res = response.data
-            return res
-        })
+        const response = await axios.post('http://localhost:3000/path', formValue)
+        return response.data
     } catch (e) {
         console.log(e)
+        throw e
     }
+}
+
+export const getAllCity = async () => {
+    return await axios.get('http://localhost:3000/allCity').then((response) => {
+        return response.data
+    })
 }

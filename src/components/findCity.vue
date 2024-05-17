@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
+import { ElNotification } from 'element-plus'
 import { usePathStore } from '@/stores/path'
 import { city } from '@/utils'
 
@@ -15,6 +16,8 @@ const rules = reactive({
   beginCity: [{ required: true, message: '请输入', trigger: 'blur' }],
   endCity: [{ required: true, message: '请输入', trigger: 'blur' }]
 })
+const btnLoading = ref(false)
+
 const tooltip = '蓝色为用户目标填写城市，灰色为途经城市'
 const removeDomain = (item) => {
   const index = cityForm.domains.indexOf(item)
@@ -30,11 +33,26 @@ const addDomain = () => {
   })
 }
 
+const findPath = async () => {
+  btnLoading.value = true
+  try {
+    await pathStore.getCityPath(cityForm)
+  } catch (e) {
+    ElNotification({
+      title: 'Error',
+      message: e.message,
+      type: 'error'
+    })
+  } finally {
+    btnLoading.value = false
+  }
+}
+
 const submitForm = (formEl) => {
   if (!formEl) return
   formEl.validate((valid) => {
     if (valid) {
-      pathStore.findCityPath(cityForm)
+      findPath()
     }
   })
 }
@@ -103,7 +121,9 @@ const getType = (cityName) => {
             />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm(formRef)">提交</el-button>
+            <el-button type="primary" @click="submitForm(formRef)" :loading="btnLoading">
+              提交{{ btnLoading }}
+            </el-button>
             <el-button @click="addDomain">增加途经点</el-button>
             <el-button @click="resetForm(formRef)">重置</el-button>
           </el-form-item>
