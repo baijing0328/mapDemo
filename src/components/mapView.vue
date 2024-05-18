@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, ref, watch } from 'vue'
 import * as echarts from 'echarts'
+import 'echarts-extension-amap'
 import chinaJSON from '@/assets/json/china.json'
 import { usePathStore } from '@/stores/path'
 import { useProvinceStore } from '@/stores/province'
@@ -29,32 +30,44 @@ function drawChina(path, province, city) {
   let myChart = echarts.init(chinaMap.value)
   echarts.registerMap('china', chinaJSON) //注册可用的地图
   let option = {
-    geo: {
-      map: 'china',
-      roam: true, //是否允许缩放，拖拽
-      zoom: 1.5, //初始化大小
-      // 缩放大小限制
-      scaleLimit: {
-        min: 1.5, //最小
-        max: 10 //最大
-      },
-      //设置中心点
+    // geo: {
+    //   map: 'china',
+    //   roam: true, //是否允许缩放，拖拽
+    //   zoom: 1.5, //初始化大小
+    //   // 缩放大小限制
+    //   scaleLimit: {
+    //     min: 1.5, //最小
+    //     max: 10 //最大
+    //   },
+    //   //设置中心点
+    //   center: [106.267691, 33.83307],
+    //   //省份地图添加背景
+    //   regions: [],
+    //   itemStyle: {
+    //     areaColor: '#f8f9f6',
+    //     color: 'red',
+    //     borderColor: '#c8c9cc',
+    //     borderWidth: 0.5
+    //   },
+    //   //高亮状态
+    //   emphasis: {
+    //     itemStyle: {
+    //       areaColor: '#d9ecff',
+    //       color: '#fff'
+    //     }
+    //   }
+    // },
+    amap: {
+      // 高德地图中心经纬度
       center: [106.267691, 33.83307],
-      //省份地图添加背景
-      regions: [],
-      itemStyle: {
-        areaColor: '#f8f9f6',
-        color: 'red',
-        borderColor: '#c8c9cc',
-        borderWidth: 0.5
-      },
-      //高亮状态
-      emphasis: {
-        itemStyle: {
-          areaColor: '#d9ecff',
-          color: '#fff'
-        }
-      }
+      // 高德地图缩放
+      zoom: 5,
+      // 启用resize
+      resizeEnable: true,
+      // 移动过程中实时渲染 默认为true 如数据量较大 建议置为false
+      renderOnMoving: true,
+      // 自定义地图样式主题
+      mapStyle: 'amap://styles/644e497a1175a2273764e37dac775820'
     },
     //配置属性
     series: [
