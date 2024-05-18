@@ -2,6 +2,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import 'element-plus/theme-chalk/src/message.scss'
 
 import App from './App.vue'
 import router from './router'

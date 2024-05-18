@@ -17,6 +17,7 @@ const rules = reactive({
   endCity: [{ required: true, message: '请输入', trigger: 'blur' }]
 })
 const btnLoading = ref(false)
+const btnDisabled = ref(false)
 
 const tooltip = '蓝色为用户目标填写城市，灰色为途经城市'
 const removeDomain = (item) => {
@@ -35,16 +36,12 @@ const addDomain = () => {
 
 const findPath = async () => {
   btnLoading.value = true
+  btnDisabled.value = true
   try {
     await pathStore.getCityPath(cityForm)
-  } catch (e) {
-    ElNotification({
-      title: 'Error',
-      message: e.message,
-      type: 'error'
-    })
   } finally {
     btnLoading.value = false
+    btnDisabled.value = false
   }
 }
 
@@ -122,10 +119,10 @@ const getType = (cityName) => {
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm(formRef)" :loading="btnLoading">
-              提交{{ btnLoading }}
+              提交
             </el-button>
-            <el-button @click="addDomain">增加途经点</el-button>
-            <el-button @click="resetForm(formRef)">重置</el-button>
+            <el-button @click="addDomain" :disabled="btnDisabled">增加途经点</el-button>
+            <el-button @click="resetForm(formRef)" :disabled="btnDisabled">重置</el-button>
           </el-form-item>
         </el-form>
       </el-card>
