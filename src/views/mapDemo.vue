@@ -5,7 +5,7 @@
     <template #header>
       <el-row justify="space-between">
         <el-col :span="4">
-          <span class="head-span">地图Demo</span>
+          <el-text class="mapTitle">地图</el-text>
         </el-col>
       </el-row>
     </template>
@@ -26,5 +26,9 @@
   height: 60%;
   margin-top: 5px;
   min-height: 300px;
+}
+.mapTitle {
+  font-size: 20px;
+  font-weight: bold;
 }
 </style>
