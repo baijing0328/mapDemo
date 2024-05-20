@@ -8,7 +8,6 @@ export const usePathStore = defineStore('path', () => {
     const city = ref([])
     const formCity = ref([])
     const getCityPath = async (formValue) => {
-        console.log(formValue)
         // const res = await findCityPath(formValue)
         formCity.value = formatFormCity(formValue)
         const res = {

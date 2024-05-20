@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import { ElNotification } from 'element-plus'
+import { Delete } from '@element-plus/icons-vue'
 import { usePathStore } from '@/stores/path'
 import { city } from '@/utils'
 
@@ -74,6 +74,7 @@ const getType = (cityName) => {
             label-width="auto"
             class="demo-dynamic"
             :rules="rules"
+            label-position="left"
           >
             <el-form-item prop="beginCity" label="起始城市">
               <el-cascader
@@ -94,8 +95,8 @@ const getType = (cityName) => {
                 trigger: 'blur'
               }"
             >
-              <el-row>
-                <el-col :span="20">
+              <el-row :gutter="8" style="width: 100%">
+                <el-col :span="18">
                   <el-cascader
                     v-model="domain.value"
                     :options="options"
@@ -103,10 +104,15 @@ const getType = (cityName) => {
                     class="cityfind"
                   />
                 </el-col>
-                <el-col :span="4">
-                  <el-button class="mt-2" @click.prevent="removeDomain(domain)" type="danger" plain>
-                    删除
-                  </el-button>
+                <el-col :span="6">
+                  <el-button
+                    class="mt-2"
+                    type="danger"
+                    :icon="Delete"
+                    @click.prevent="removeDomain(domain)"
+                    plain
+                    circle
+                  />
                 </el-col>
               </el-row>
             </el-form-item>
