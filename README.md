@@ -2,9 +2,9 @@
 >
 > 笑死，忽略掉bmap这个分支，百度根本没过我的申请--2024/5/20
 >
-> 先试着跑下tsdemo分支，这个分支跑不起来再试试test分支 --2024/5/21
+> *先试着跑下tsdemo分支，这个分支跑不起来再试试test分支 --2024/5/21*
 
-> test分支是用JavaScript写的，tsdemo分支是用TypeScript写的，其实功能上没大区别，但ts相较于js多了一些类型声明，更加严谨了，而且我觉得ts写的比js优雅，所以可以跑跑试试，能用的话就直接tsdemo好了
+> test分支是用JavaScript写的，tsdemo分支是用~~AnyScript（）~~  TypeScript写的，其实功能上没大区别，但ts相较于js多了一些类型声明，更加严谨了，而且我觉得ts写的比js优雅，所以可以跑跑试试，能用的话就直接tsdemo好了
 ### 一、项目运行
 
 1. `npm install` 安装项目依赖
