@@ -1,6 +1,5 @@
 <script setup>
 import HeadContainer from './views/headContainer.vue'
-// import MainContainer from './views/mainContainer.vue'
 import MapDemo from './views/mapDemo.vue'
 </script>
 

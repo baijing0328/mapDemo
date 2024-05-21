@@ -4,6 +4,7 @@ import * as echarts from 'echarts'
 import chinaJSON from '@/assets/json/china.json'
 import { usePathStore } from '@/stores/path'
 import { useProvinceStore } from '@/stores/province'
+import { Position } from '@/utils'
 
 const chinaMap = ref()
 
@@ -15,17 +16,16 @@ const planePath = // 飞机svg
 
 onMounted(() => {
   drawChina(pathStore.path, provinceStore.province, pathStore.city)
-  console.log(pathStore)
 })
 
 watch(
   () => pathStore.path,
-  (val) => {
+  (val: Array<Array<string>>) => {
     drawChina(val, provinceStore.province, pathStore.city)
   }
 )
 
-function drawChina(path, province, city) {
+function drawChina(path: Array<Array<string>>, province: Array<Position>, city: Array<Position>) {
   let myChart = echarts.init(chinaMap.value)
   echarts.registerMap('china', chinaJSON) //注册可用的地图
   //option这里看下readme里面的官方文档吧，懒得看的话简单看下注释也可以（？），应该可以看懂

@@ -60,7 +60,7 @@ const resetForm = (formEl) => {
   formEl.resetFields()
 }
 //根据数组来判断tag的颜色
-const getType = (cityName) => {
+const getType = (cityName: string): string => {
   return pathStore.formCity.includes(cityName) ? 'primary' : 'info'
 }
 </script>
