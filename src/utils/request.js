@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-
+//这边根据实际情况修改
 const baseURL = 'http://localhost:3000'
 
 const instance = axios.create({
@@ -19,7 +19,6 @@ instance.interceptors.response.use(
         return Promise.reject(res.data)
     },
     (err) => {
-        console.log(err.message)
         //不知道有没有登陆的逻辑
         //     if (err.response?.status === 401) {
         //     router.push('/login')

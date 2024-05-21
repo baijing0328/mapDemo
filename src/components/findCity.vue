@@ -38,6 +38,7 @@ const findPath = async () => {
   btnLoading.value = true
   btnDisabled.value = true
   try {
+    //这边异常在utils里面处理了，所以没用到catch
     await pathStore.getCityPath(cityForm)
   } finally {
     btnLoading.value = false
@@ -58,7 +59,7 @@ const resetForm = (formEl) => {
   if (!formEl) return
   formEl.resetFields()
 }
-
+//根据数组来判断tag的颜色
 const getType = (cityName) => {
   return pathStore.formCity.includes(cityName) ? 'primary' : 'info'
 }

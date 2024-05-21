@@ -20,6 +20,7 @@ import MapDemo from './views/mapDemo.vue'
   background-color: white;
   display: flex;
   align-items: center;
+  box-shadow: 0 1px 3px #c8c9cc;
 }
 
 .main {

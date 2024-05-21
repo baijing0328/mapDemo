@@ -28,6 +28,7 @@ watch(
 function drawChina(path, province, city) {
   let myChart = echarts.init(chinaMap.value)
   echarts.registerMap('china', chinaJSON) //注册可用的地图
+  //option这里看下readme里面的官方文档吧，懒得看的话简单看下注释也可以（？），应该可以看懂
   let option = {
     geo: {
       map: 'china',
@@ -41,7 +42,6 @@ function drawChina(path, province, city) {
       //设置中心点
       center: [106.267691, 33.83307],
       //省份地图添加背景
-      regions: [],
       itemStyle: {
         areaColor: '#f8f9f6',
         color: 'red',
@@ -61,6 +61,8 @@ function drawChina(path, province, city) {
       {
         type: 'scatter',
         coordinateSystem: 'geo',
+        //province是各省省会，city是查询路线返回的经过城市的坐标
+        //这里没找到合适的方式实现放大后各省再显示城市的功能
         data: [...province, ...city],
         symbolSize: 5,
         label: {

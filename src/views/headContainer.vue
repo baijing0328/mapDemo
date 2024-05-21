@@ -7,7 +7,6 @@
 
 <style>
 .head-text {
-  font-family: 'HYWenHei 85W';
   font-size: 28px;
   color: #002fa7;
 }
