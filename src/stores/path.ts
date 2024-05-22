@@ -1,22 +1,15 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { formatFormCity, Position } from '@/utils'
+import { formatFormCity } from '@/utils'
+import type { Position, Path, CityResponse } from '@/utils'
 import { findCityPath } from '@/api'
 
-interface CityResponse {
-  data: {
-    code: number
-    message: string
-    path: Array<Array<string>>
-    city: Array<Position>
-  }
-}
-
 export const usePathStore = defineStore('path', () => {
-  const path = ref([])
-  const city = ref([])
+  const path = ref<Array<Path>>([])
+  const city = ref<Array<Position>>([])
   const formCity = ref([])
   const getCityPath = async (formValue) => {
+    console.log('formValue', formValue)
     formCity.value = formatFormCity(formValue)
     // findCityPath(formValue).then((res: CityResponse) => {
     //   path.value = [{ coords: res.data.path }]

@@ -1,36 +1,43 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import { Delete } from '@element-plus/icons-vue'
+import type { FormInstance, FormRules } from 'element-plus'
 import { usePathStore } from '@/stores/path'
 import { city } from '@/utils'
 
+interface CityForm {
+  domains?: Array<{ key: number; value: Array<string> }>
+  beginCity: Array<string>
+  endCity: Array<string>
+}
+
 const options = city
-const formRef = ref()
+const formRef = ref<FormInstance>()
 const pathStore = usePathStore()
-const cityForm = reactive({
-  domains: [{ key: 1, value: '' }],
-  beginCity: '',
-  endCity: ''
+const cityForm = reactive<CityForm>({
+  domains: [{ key: 1, value: [] }],
+  beginCity: [],
+  endCity: []
 })
-const rules = reactive({
+const rules = reactive<FormRules<CityForm>>({
   beginCity: [{ required: true, message: '请输入', trigger: 'blur' }],
   endCity: [{ required: true, message: '请输入', trigger: 'blur' }]
 })
-const btnLoading = ref(false)
-const btnDisabled = ref(false)
+const btnLoading = ref<boolean>(false)
+const btnDisabled = ref<boolean>(false)
 
-const tooltip = '蓝色为用户目标填写城市，灰色为途经城市'
-const removeDomain = (item) => {
+const tooltip: string = '蓝色为用户目标填写城市，灰色为途经城市'
+const removeDomain = (item): void => {
   const index = cityForm.domains.indexOf(item)
   if (index !== -1) {
     cityForm.domains.splice(index, 1)
   }
 }
 
-const addDomain = () => {
+const addDomain = (): void => {
   cityForm.domains.push({
     key: Date.now(),
-    value: ''
+    value: []
   })
 }
 
@@ -46,7 +53,7 @@ const findPath = async () => {
   }
 }
 
-const submitForm = (formEl) => {
+const submitForm = (formEl): void => {
   if (!formEl) return
   formEl.validate((valid) => {
     if (valid) {
@@ -55,7 +62,7 @@ const submitForm = (formEl) => {
   })
 }
 
-const resetForm = (formEl) => {
+const resetForm = (formEl): void => {
   if (!formEl) return
   formEl.resetFields()
 }

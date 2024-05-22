@@ -1,4 +1,4 @@
-interface formatCity {
+interface FormatCity {
   beginCity: Array<string>
   endCity: Array<string>
   domains: Array<string>
@@ -8,8 +8,26 @@ export interface Position {
   name: string
   value: Array<string>
 }
+export interface Path {
+  coords: Array<Array<number>>
+}
+export interface CityResponse {
+  data: {
+    code: number
+    message: string
+    path: Array<Array<string>>
+    city: Array<Position>
+  }
+}
+export interface PositionResponse {
+  data: {
+    code: number
+    message: string
+    cityPosition: Array<Position>
+  }
+}
 
-interface CityOptions {
+export interface CityOptions {
   value: string
   label: string
   children?: CityOptions[]
@@ -1778,7 +1796,7 @@ export const cityPosition: Array<Position> = [
   }
 ]
 //转换
-export const formatParams = (formValue): formatCity => {
+export const formatParams = (formValue): FormatCity => {
   const form = JSON.parse(JSON.stringify(formValue))
   const { beginCity, domains, endCity } = form
   let tempBegin,
