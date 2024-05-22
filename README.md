@@ -4,7 +4,9 @@
 > 
 >***先试着跑下tsdemo分支，这个分支跑不起来再试试test分支 --2024/5/21***
 
-> test分支是用JavaScript写的，tsdemo分支是用~~AnyScript（）~~  TypeScript写的，其实功能上没大区别，但ts相较于js多了一些类型声明，更加严谨了，而且我觉得ts写的比js优雅，所以可以跑跑试试，能用的话就直接tsdemo好了
+> ~~test分支是用JavaScript写的，tsdemo分支是用TypeScript写的，其实功能上没大区别，但ts相较于js多了一些类型声明，更加严谨了，而且我觉得ts写的比js优雅，所以可以跑跑试试，能用的话就直接tsdemo好了~~
+>
+> 指正：这俩分支功能没差别，tsdemo是我在一边复习ts的时候一边改的，如果愿意的话可以试一下，相较来说就多了一些类型声明，主要集成在`@/utils/index.ts`下面了，也就是那些带着interface的
 ### 一、项目运行
 
 1. `npm install` 安装项目依赖
