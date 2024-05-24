@@ -15,7 +15,7 @@ export interface CityResponse {
   data: {
     code: number
     message: string
-    path: Array<Array<string>>
+    path: Array<Array<number>>
     city: Array<Position>
   }
 }

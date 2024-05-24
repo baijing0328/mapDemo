@@ -11,10 +11,12 @@ export const usePathStore = defineStore('path', () => {
   const getCityPath = async (formValue) => {
     console.log('formValue', formValue)
     formCity.value = formatFormCity(formValue)
-    // findCityPath(formValue).then((res: CityResponse) => {
-    //   path.value = [{ coords: res.data.path }]
-    //   city.value = res.data.city
-    // })
+    //测试loading
+    setTimeout(() => {}, 1000)
+    findCityPath(formValue).then((res: CityResponse) => {
+      path.value = [{ coords: res.data.path }]
+      city.value = res.data.city
+    })
     // 为了方便调试，这里直接写死数据,实际开发中请删除,使用上面的代码
     // 当然上面代码也不一定对（），到时候再说.jpg
     const res = {

@@ -4,14 +4,13 @@ import { Delete } from '@element-plus/icons-vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { usePathStore } from '@/stores/path'
 import { city } from '@/utils'
-
+//类型声明
 interface CityForm {
   domains?: Array<{ key: number; value: Array<string> }>
   beginCity: Array<string>
   endCity: Array<string>
 }
-
-const options = city
+//变量
 const formRef = ref<FormInstance>()
 const pathStore = usePathStore()
 const cityForm = reactive<CityForm>({
@@ -25,9 +24,11 @@ const rules = reactive<FormRules<CityForm>>({
 })
 const btnLoading = ref<boolean>(false)
 const btnDisabled = ref<boolean>(false)
-
 const tooltip: string = '蓝色为用户目标填写城市，灰色为途经城市'
-const removeDomain = (item): void => {
+//函数
+//我是懒狗，箭头函数用习惯了
+//const 函数名 = (参数名：参数类型)：返回值类型=>{}
+const removeDomain = (item: { key: number; value: string[] }): void => {
   const index = cityForm.domains.indexOf(item)
   if (index !== -1) {
     cityForm.domains.splice(index, 1)
@@ -48,12 +49,14 @@ const findPath = async () => {
     //这边异常在utils里面处理了，所以没用到catch
     await pathStore.getCityPath(cityForm)
   } finally {
+    //结束loading和禁用
+    //因为有loading了所以没加防抖
     btnLoading.value = false
     btnDisabled.value = false
   }
 }
 
-const submitForm = (formEl): void => {
+const submitForm = (formEl: FormInstance): void => {
   if (!formEl) return
   formEl.validate((valid) => {
     if (valid) {
@@ -62,7 +65,7 @@ const submitForm = (formEl): void => {
   })
 }
 
-const resetForm = (formEl): void => {
+const resetForm = (formEl: FormInstance): void => {
   if (!formEl) return
   formEl.resetFields()
 }
@@ -87,7 +90,7 @@ const getType = (cityName: string): string => {
             <el-form-item prop="beginCity" label="起始城市">
               <el-cascader
                 v-model="cityForm.beginCity"
-                :options="options"
+                :options="city"
                 filterable
                 class="cityfind"
               />
@@ -105,12 +108,7 @@ const getType = (cityName: string): string => {
             >
               <el-row :gutter="8" style="width: 100%">
                 <el-col :span="18">
-                  <el-cascader
-                    v-model="domain.value"
-                    :options="options"
-                    filterable
-                    class="cityfind"
-                  />
+                  <el-cascader v-model="domain.value" :options="city" filterable class="cityfind" />
                 </el-col>
                 <el-col :span="6">
                   <el-button
@@ -125,12 +123,7 @@ const getType = (cityName: string): string => {
               </el-row>
             </el-form-item>
             <el-form-item prop="endCity" label="目的城市">
-              <el-cascader
-                v-model="cityForm.endCity"
-                :options="options"
-                filterable
-                class="cityfind"
-              />
+              <el-cascader v-model="cityForm.endCity" :options="city" filterable class="cityfind" />
             </el-form-item>
             <el-form-item>
               <el-button
