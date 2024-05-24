@@ -25,6 +25,7 @@ const rules = reactive<FormRules<CityForm>>({
 const btnLoading = ref<boolean>(false)
 const btnDisabled = ref<boolean>(false)
 const tooltip: string = '蓝色为用户目标填写城市，灰色为途经城市'
+
 //函数
 //我是懒狗，箭头函数用习惯了
 //const 函数名 = (参数名：参数类型)：返回值类型=>{}
@@ -134,12 +135,12 @@ const getType = (cityName: string): string => {
               >
                 提交
               </el-button>
-              <el-button @click="addDomain" :disabled="btnDisabled" placeholder="请选择"
-                >增加途经点</el-button
-              >
-              <el-button @click="resetForm(formRef)" :disabled="btnDisabled" placeholder="请选择"
-                >重置</el-button
-              >
+              <el-button @click="addDomain" :disabled="btnDisabled" placeholder="请选择">
+                增加途经点
+              </el-button>
+              <el-button @click="resetForm(formRef)" :disabled="btnDisabled" placeholder="请选择">
+                重置
+              </el-button>
             </el-form-item>
           </el-form>
         </el-scrollbar>

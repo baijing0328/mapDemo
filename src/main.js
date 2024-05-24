@@ -6,6 +6,7 @@ import 'element-plus/theme-chalk/src/message.scss'
 
 import App from './App.vue'
 import router from './router'
+import '@/mock/index'
 import '@/assets/main.scss'
 
 const app = createApp(App)
