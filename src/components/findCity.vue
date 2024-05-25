@@ -94,6 +94,7 @@ const getType = (cityName: string): string => {
                 :options="city"
                 filterable
                 class="cityfind"
+                placeholder="请选择"
               />
             </el-form-item>
             <el-form-item
@@ -109,7 +110,13 @@ const getType = (cityName: string): string => {
             >
               <el-row :gutter="8" style="width: 100%">
                 <el-col :span="18">
-                  <el-cascader v-model="domain.value" :options="city" filterable class="cityfind" />
+                  <el-cascader
+                    v-model="domain.value"
+                    :options="city"
+                    filterable
+                    class="cityfind"
+                    placeholder="请选择"
+                  />
                 </el-col>
                 <el-col :span="6">
                   <el-button
@@ -124,23 +131,29 @@ const getType = (cityName: string): string => {
               </el-row>
             </el-form-item>
             <el-form-item prop="endCity" label="目的城市">
-              <el-cascader v-model="cityForm.endCity" :options="city" filterable class="cityfind" />
+              <el-cascader
+                v-model="cityForm.endCity"
+                :options="city"
+                filterable
+                class="cityfind"
+                placeholder="请选择"
+              />
             </el-form-item>
             <el-form-item>
-              <el-button
-                type="primary"
-                @click="submitForm(formRef)"
-                :loading="btnLoading"
-                placeholder="请选择"
-              >
-                提交
-              </el-button>
-              <el-button @click="addDomain" :disabled="btnDisabled" placeholder="请选择">
-                增加途经点
-              </el-button>
-              <el-button @click="resetForm(formRef)" :disabled="btnDisabled" placeholder="请选择">
-                重置
-              </el-button>
+              <el-row justify="space-around" style="width: 100%">
+                <el-col :span="6" style="text-align: center">
+                  <el-button type="primary" @click="submitForm(formRef)" :loading="btnLoading">
+                    提交
+                  </el-button>
+                </el-col>
+                <el-col :span="6" style="text-align: center">
+                  <el-button @click="addDomain" :disabled="btnDisabled"> 增加途经点 </el-button>
+                </el-col>
+                <el-col :span="6" style="text-align: center">
+                  <el-button @click="resetForm(formRef)" :disabled="btnDisabled"> 重置 </el-button>
+                </el-col>
+                <el-col :span="6"></el-col>
+              </el-row>
             </el-form-item>
           </el-form>
         </el-scrollbar>

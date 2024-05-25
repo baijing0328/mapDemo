@@ -6,6 +6,7 @@ import 'element-plus/theme-chalk/src/message.scss'
 
 import App from './App.vue'
 import router from './router'
+//注释掉下面这行
 import '@/mock/index'
 import '@/assets/main.scss'
 

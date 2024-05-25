@@ -1,6 +1,6 @@
 interface FormatCity {
-  beginCity: Array<string>
-  endCity: Array<string>
+  beginCity: string
+  endCity: string
   domains: Array<string>
 }
 
@@ -1819,8 +1819,16 @@ export const formatParams = (formValue): FormatCity => {
   }
 }
 
+const concatCity = (beginCity: string, domains: string[], endCity: string): Array<string> => {
+  const temp = []
+  temp.push(beginCity)
+  temp.push(...domains)
+  temp.push(endCity)
+  return temp
+}
+
 export const formatFormCity = (formValue): Array<string | string[]> => {
   const { beginCity, domains, endCity } = formatParams(formValue)
-  const city = [beginCity, ...domains, endCity]
+  const city = concatCity(beginCity, domains, endCity)
   return city
 }
