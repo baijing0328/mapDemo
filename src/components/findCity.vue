@@ -25,6 +25,10 @@ const rules = reactive<FormRules<CityForm>>({
 const btnLoading = ref<boolean>(false)
 const btnDisabled = ref<boolean>(false)
 const tooltip: string = '蓝色为用户目标填写城市，灰色为途经城市'
+enum TagType {
+  info,
+  primary
+}
 
 //函数
 //我是懒狗，箭头函数用习惯了
@@ -72,7 +76,7 @@ const resetForm = (formEl: FormInstance): void => {
 }
 //根据数组来判断tag的颜色
 const getType = (cityName: string): string => {
-  return pathStore.formCity.includes(cityName) ? 'primary' : 'info'
+  return TagType[Number(pathStore.formCity.includes(cityName))]
 }
 </script>
 <template>
