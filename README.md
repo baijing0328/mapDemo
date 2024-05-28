@@ -5,6 +5,7 @@
 > ***先试着跑下tsdemo分支，这个分支跑不起来再试试test分支 --2024/5/21***
 >
 > tsdemo分支下面用mockjs模拟的数据，实际联调的时候注释掉main.js中的`import '@/mock/index'` --2024/5/24
+> 发现有个东西叫vue amap，研究下再说，但这个感觉不一定能很及时的弄得出来，如果弄出来在readme里说一下 --2024/5/28
 
 > ~~test分支是用JavaScript写的，tsdemo分支是用TypeScript写的，其实功能上没大区别，但ts相较于js多了一些类型声明，更加严谨了，而且我觉得ts写的比js优雅，所以可以跑跑试试，能用的话就直接tsdemo好了~~
 >
