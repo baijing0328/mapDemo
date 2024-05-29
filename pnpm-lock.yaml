@@ -54,6 +54,9 @@ importers:
       '@vue/eslint-config-prettier':
         specifier: ^9.0.0
         version: 9.0.0(eslint@8.57.0)(prettier@3.2.5)
+      '@vuemap/unplugin-resolver':
+        specifier: ^2.0.0
+        version: 2.0.0(unplugin-vue-components@0.27.0(@babel/parser@7.24.5)(rollup@4.17.2)(vue@3.4.21))
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -531,6 +534,12 @@ packages:
   '@vuemap/three-layer@0.0.12':
     resolution: {integrity: sha512-mBalsCBZTFX6wDaJ2/Qd+wGpQwiYijOWmtL1kz9IWPcyYWF0wTelePsyCB7iPbzdSGgKbCxdUBwaE6BC1ouD4g==}
     engines: {node: '>= 16'}
+
+  '@vuemap/unplugin-resolver@2.0.0':
+    resolution: {integrity: sha512-jhSZCxBwXN5txjlV1zRGfsLS+G+wrTA8oQWkBD0g3A0Wqn9Hvq0KKDAePA23m+gwZk4xqOMi1gBoUiqqiIoaMw==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      unplugin-vue-components: '>=0.17.15'
 
   '@vuemap/vue-amap-extra@2.1.2':
     resolution: {integrity: sha512-NdHf7bwUQAVkCx1p6r2eBmKF4y5ovpbavkk3HaHSRPHer3or94INTRAPUKJjIGWLYO9nAc11XWTHrXy1fFHJRQ==}
@@ -1754,6 +1763,10 @@ snapshots:
     dependencies:
       '@types/three': 0.143.0
       three: 0.143.0
+
+  '@vuemap/unplugin-resolver@2.0.0(unplugin-vue-components@0.27.0(@babel/parser@7.24.5)(rollup@4.17.2)(vue@3.4.21))':
+    dependencies:
+      unplugin-vue-components: 0.27.0(@babel/parser@7.24.5)(rollup@4.17.2)(vue@3.4.21)
 
   '@vuemap/vue-amap-extra@2.1.2(@vuemap/vue-amap@2.1.2(vue@3.4.21))(vue@3.4.21)':
     dependencies:
