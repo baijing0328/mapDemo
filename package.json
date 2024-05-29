@@ -12,6 +12,9 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@vuemap/vue-amap": "^2.1.2",
+    "@vuemap/vue-amap-extra": "^2.1.2",
+    "@vuemap/vue-amap-loca": "^2.1.1",
     "axios": "^1.6.8",
     "echarts": "^5.5.0",
     "element-plus": "^2.7.2",
