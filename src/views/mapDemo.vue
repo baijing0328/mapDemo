@@ -11,7 +11,10 @@
     </template>
     <el-row :gutter="20">
       <el-col :span="16">
-        <map-view />
+        <!-- <map-view /> -->
+        <el-card body-class="amapContainer" :body-style="{ padding: '0px' }" shadow="always">
+          <amap-view />
+        </el-card>
       </el-col>
       <el-col :span="8">
         <find-city />
@@ -30,5 +33,8 @@
 .mapTitle {
   font-size: 20px;
   font-weight: bold;
+}
+.amapContainer {
+  padding: 0;
 }
 </style>
