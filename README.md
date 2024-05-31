@@ -11,10 +11,46 @@
 >
 > + 指正：~~这俩分支功能没差别~~，tsdemo是我在一边复习ts的时候一边改的，如果愿意的话可以试一下，相较来说就多了一些类型声明，主要集成在`@/utils/index.ts`下面了，也就是那些带着interface的
 > + 现在有区别了，我后面有几个提交只在tsdemo上，但大体功能两个分支都满足，这些提交大部分是关于一些优化的
+### vue3安装（？）
+
+#### node安装
+
+https://nodejs.org/en
+
+下载lts版本安装就好了
+
+#### npm安装
+
+```powershell
+node -v#看看版本
+npm cache clean -f#清除npm缓存
+npm install npm -g#npm升级到最新版本
+npm init vue@lastest#安装最新版本vue
+```
+
+#### pnpm安装//这个弄不弄都行吧，pnpm说是会更快一点
+
+```powershell
+npm install -g pnpm
+pnpm create vue
+```
+
+
+
 ### 一、项目运行
 
 1. `npm install` 安装项目依赖
 2. `npm run dev`运行项目
+
+不同命令对比如下：
+
+| npm                    | yarn                | pnpm                |
+| ---------------------- | ------------------- | ------------------- |
+| `npm install`          | `yarn`              | `pnpm install`      |
+| `npm install axios`    | `yarn add axios`    | `pnpm add axios`    |
+| `npm install axios -D` | `yarn add axios -D` | `pnpm add axios -D` |
+| `npm uninstall axios`  | `yarn remove axios` | `pnpm remove axio`  |
+| `npm run dev`          | `yarn dev`          | `pnpm dev`          |
 
 #### 主要技术
 
