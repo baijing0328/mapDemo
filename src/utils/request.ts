@@ -1,13 +1,24 @@
 import axios from 'axios'
+import { useUserStore } from '@/stores/user'
 import { ElMessage } from 'element-plus'
 //这边根据实际情况修改
-const baseURL = 'http://localhost:3000'
+const baseURL = '/api'
 
 const instance = axios.create({
   baseURL,
-  timeout: 10000
+  timeout: 5000
 })
 
+instance.interceptors.request.use(
+  (config) => {
+    const userStore = useUserStore()
+    if (userStore.token) {
+      config.headers.common['token'] = userStore.token
+    }
+    return config
+  },
+  (err) => Promise.reject(err)
+)
 // 响应拦截器
 instance.interceptors.response.use(
   (res) => {

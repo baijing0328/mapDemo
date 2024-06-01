@@ -1,30 +1,13 @@
 <script setup>
-import HeadContainer from './views/headContainer.vue'
-import MapDemo from './views/mapDemo.vue'
+import zh from 'element-plus/es/locale/lang/zh-cn.mjs'
 </script>
 
 <template>
-  <el-container>
-    <el-header class="head">
-      <head-container height="72px" />
-    </el-header>
-    <el-main class="main">
-      <map-demo />
-    </el-main>
-  </el-container>
+  <div>
+    <el-config-provider :locale="zh">
+      <router-view></router-view>
+    </el-config-provider>
+  </div>
 </template>
 
-<style scoped>
-.head {
-  background-color: white;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 1px 3px #c8c9cc;
-}
-
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-</style>
+<style scoped></style>
