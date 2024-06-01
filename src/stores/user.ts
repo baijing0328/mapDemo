@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { userGetInfoService } from '@/api/user'
 
 export const useUserStore = defineStore('user', () => {
-  const token = ref('')
+  const token = ref('1111')
   const setToken = (newToken) => {
     token.value = newToken
   }
