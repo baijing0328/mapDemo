@@ -55,32 +55,28 @@ const handleCommand = async (key) => {
             <span>管理者信息</span>
           </el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="/distance">
-          <el-icon><Promotion /></el-icon>
-          <span>距离查询</span>
-        </el-menu-item>
+        <el-sub-menu index="/distance">
+          <template #title>
+            <el-icon><Position /></el-icon>
+            <span>距离</span>
+          </template>
+          <el-menu-item index="/distance/query">
+            <el-icon><Search /></el-icon>
+            <span>距离查询</span>
+          </el-menu-item>
+          <el-menu-item index="/distance/map">
+            <el-icon><MapLocation /></el-icon>
+            <span>地图展示</span>
+          </el-menu-item>
+        </el-sub-menu>
         <el-menu-item index="/material">
           <el-icon><Van /></el-icon>
           <span>物资管理</span>
         </el-menu-item>
-        <el-sub-menu index="/user">
-          <template #title>
-            <el-icon><UserFilled /></el-icon>
-            <span>个人中心</span>
-          </template>
-          <el-menu-item index="/user/profile">
-            <el-icon><User /></el-icon>
-            <span>基本资料</span>
-          </el-menu-item>
-          <el-menu-item index="/user/avatar">
-            <el-icon><Crop /></el-icon>
-            <span>更换头像</span>
-          </el-menu-item>
-          <el-menu-item index="/user/password">
-            <el-icon><EditPen /></el-icon>
-            <span>重置密码</span>
-          </el-menu-item>
-        </el-sub-menu>
+        <el-menu-item index="/user/profile">
+          <el-icon><User /></el-icon>
+          <span>个人资料</span>
+        </el-menu-item>
       </el-menu>
     </el-aside>
     <el-container>

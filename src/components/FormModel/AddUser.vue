@@ -178,9 +178,8 @@ const handleEdit = (row) => {
 }
 </script>
 <template>
-  <el-tooltip content="添加" placement="top">
-    <el-button icon="plus" style="width: 50px" type="primary" @click="add"></el-button>
-  </el-tooltip>
+  <el-button style="width: 100px" type="primary" @click="add">增加用户</el-button>
+
   <el-dialog v-model="dialogVisible" title="操作" width="30%" @close="cancel">
     <el-form ref="formRef" :model="form" :rules="rules" label-width="120px">
       <el-form-item label="账号" prop="username">

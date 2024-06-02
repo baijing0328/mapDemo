@@ -25,13 +25,22 @@ const router = createRouter({
         },
         {
           path: '/distance',
-          name: '距离查询',
-          component: () => import('@/views/distance/index.vue')
+          name: '距离',
+          redirect: '/distance/query',
+          children: [
+            { path: '/distance/query', name: '查询', component: () => import('@/views/distance/index.vue') },
+            { path: '/distance/map', name: '地图展示', component: () => import('@/views/distance/DistanceMap.vue') },
+          ],
         },
         {
           path: '/material',
           name: '物资管理',
           component: () => import('@/views/material/index.vue')
+        },
+        {
+          path: '/user/profile',
+          name: '个人信息',
+          component: () => import('@/views/userinfo/UserProfile.vue')
         }
       ]
     }

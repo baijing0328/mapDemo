@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, provide } from 'vue'
 import { ElMessage } from 'element-plus'
 import { materialGetListService, materialDeleteService } from '@/api/material'
 const tableData = ref([])
@@ -51,6 +51,7 @@ const handleDelete = async (id) => {
 onMounted(() => {
   load()
 })
+provide('material-table-load', load)
 </script>
 <template>
   <el-card>
