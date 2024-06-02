@@ -55,9 +55,13 @@ const handleCommand = async (key) => {
             <span>管理者信息</span>
           </el-menu-item>
         </el-sub-menu>
-        <el-menu-item index="/article/manage">
+        <el-menu-item index="/distance">
           <el-icon><Promotion /></el-icon>
           <span>距离查询</span>
+        </el-menu-item>
+        <el-menu-item index="/material">
+          <el-icon><Van /></el-icon>
+          <span>物资管理</span>
         </el-menu-item>
         <el-sub-menu index="/user">
           <template #title>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { ref, provide } from 'vue'
+import { onMounted, ref } from 'vue'
 import { ElMessage } from 'element-plus'
-import { userInfoFindService, deleteUserService } from '@/api/userinfo'
+import { materialGetListService, materialDeleteService } from '@/api/material'
 const tableData = ref([])
 const currentPage = ref(1)
 const pageSize = ref(10)
@@ -10,19 +10,14 @@ const search = ref('')
 const loading = ref(false)
 const handleSizeChange = (val) => {
   pageSize.value = val
-  load()
 }
 const handleCurrentChange = (val) => {
   currentPage.value = val
-  load()
-}
-const filterTag = (value, row) => {
-  return row.gender === value
 }
 const load = async () => {
   loading.value = true
   try {
-    const res = await userInfoFindService({
+    const res = await materialGetListService({
       page: currentPage.value,
       size: pageSize.value,
       name: search.value
@@ -37,16 +32,14 @@ const reset = () => {
   search.value = ''
   load()
 }
-provide('tableReload', load())
-const handleDelete = async (username) => {
-  const res: any = await deleteUserService(username)
+const handleDelete = async (id) => {
+  const res: any = await materialDeleteService(id)
   if (res.code === '0') {
     ElMessage({
       message: '删除成功',
       type: 'success'
     })
     search.value = ''
-    loading.value = true
     load()
   } else {
     ElMessage({
@@ -55,6 +48,9 @@ const handleDelete = async (username) => {
     })
   }
 }
+onMounted(() => {
+  load()
+})
 </script>
 <template>
   <el-card>
@@ -63,37 +59,28 @@ const handleDelete = async (username) => {
         <el-input
           v-model="search"
           clearable
-          placeholder="请输入姓名"
+          placeholder="请输入地名"
           prefix-icon="Search"
           style="width: 20%"
         />
         <el-button icon="Search" style="margin-left: 5px" type="primary" @click="load" />
         <el-button icon="refresh-left" style="margin-left: 10px" type="default" @click="reset" />
         <div style="float: right">
-          <form-index type="user" />
+          <form-index type="material" />
         </div>
       </div>
 
-      <el-table :data="tableData" style="width: 100%">
-        <el-table-column label="#" type="index" />
-        <el-table-column prop="username" label="账号" sortable />
-        <el-table-column prop="name" label="姓名" />
-        <el-table-column
-          :filter-method="filterTag"
-          :filters="[
-            { text: '男', value: '男' },
-            { text: '女', value: '女' }
-          ]"
-          filter-placement="bottom-end"
-          label="性别"
-          prop="gender"
-        />
+      <el-table :data="tableData" style="width: 100%" v-loading="loading">
+        <el-table-column label="编码" prop="id" />
+        <el-table-column label="物资种类" prop="category" />
+
+        <el-table-column label="仓库位置" prop="depot" />
+        <el-table-column label="数量" prop="quantity" sortable />
+        <!--      操作栏-->
         <el-table-column label="操作">
           <template #default="scope">
-            <el-button link type="primary" size="small" @click="handleEdit(scope.row)">
-              Detail
-            </el-button>
-            <el-popconfirm title="确认删除？" @confirm="handleDelete(scope.row.username)">
+            <el-button icon="Edit" type="primary" @click="handleEdit(scope.row)"></el-button>
+            <el-popconfirm title="确认删除？" @confirm="handleDelete(scope.row.id)">
               <template #reference>
                 <el-button icon="Delete" type="danger"></el-button>
               </template>

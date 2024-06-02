@@ -1,59 +1,24 @@
-<script lang="ts" setup>
-import { ref, provide } from 'vue'
+<script setup>
+import { ref, nextTick } from 'vue'
 import { ElMessage } from 'element-plus'
-import { userInfoFindService, deleteUserService } from '@/api/userinfo'
-const tableData = ref([])
+import { cityList } from '@/utils/index'
+const columns = [
+  {
+    prop: 'username',
+    label: '地名'
+  },
+  ...cityList
+]
 const currentPage = ref(1)
 const pageSize = ref(10)
 const total = ref(0)
 const search = ref('')
-const loading = ref(false)
+
 const handleSizeChange = (val) => {
   pageSize.value = val
-  load()
 }
 const handleCurrentChange = (val) => {
   currentPage.value = val
-  load()
-}
-const filterTag = (value, row) => {
-  return row.gender === value
-}
-const load = async () => {
-  loading.value = true
-  try {
-    const res = await userInfoFindService({
-      page: currentPage.value,
-      size: pageSize.value,
-      name: search.value
-    })
-    tableData.value = res.data.records
-    total.value = res.data.total
-  } finally {
-    loading.value = false
-  }
-}
-const reset = () => {
-  search.value = ''
-  load()
-}
-provide('tableReload', load())
-const handleDelete = async (username) => {
-  const res: any = await deleteUserService(username)
-  if (res.code === '0') {
-    ElMessage({
-      message: '删除成功',
-      type: 'success'
-    })
-    search.value = ''
-    loading.value = true
-    load()
-  } else {
-    ElMessage({
-      message: res.msg,
-      type: 'error'
-    })
-  }
 }
 </script>
 <template>
@@ -63,32 +28,30 @@ const handleDelete = async (username) => {
         <el-input
           v-model="search"
           clearable
-          placeholder="请输入姓名"
+          placeholder="请输入地名"
           prefix-icon="Search"
           style="width: 20%"
         />
         <el-button icon="Search" style="margin-left: 5px" type="primary" @click="load" />
         <el-button icon="refresh-left" style="margin-left: 10px" type="default" @click="reset" />
         <div style="float: right">
-          <form-index type="user" />
+          <el-tooltip content="添加" placement="top">
+            <el-button icon="plus" style="width: 50px" type="primary" @click="add"></el-button>
+          </el-tooltip>
         </div>
       </div>
 
       <el-table :data="tableData" style="width: 100%">
-        <el-table-column label="#" type="index" />
-        <el-table-column prop="username" label="账号" sortable />
-        <el-table-column prop="name" label="姓名" />
+        <el-table-column label="#" type="index" fixed />
         <el-table-column
-          :filter-method="filterTag"
-          :filters="[
-            { text: '男', value: '男' },
-            { text: '女', value: '女' }
-          ]"
-          filter-placement="bottom-end"
-          label="性别"
-          prop="gender"
+          v-for="item in columns"
+          :key="item.prop"
+          :label="item.label"
+          :prop="item.prop"
+          :fixed="item.prop === 'username'"
         />
-        <el-table-column label="操作">
+
+        <el-table-column label="操作" fixed="right" width="150">
           <template #default="scope">
             <el-button link type="primary" size="small" @click="handleEdit(scope.row)">
               Detail
@@ -114,3 +77,4 @@ const handleDelete = async (username) => {
     </el-space>
   </el-card>
 </template>
+<style lang="scss" scoped></style>

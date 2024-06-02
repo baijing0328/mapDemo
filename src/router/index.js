@@ -16,8 +16,22 @@ const router = createRouter({
           name: '用户信息',
           redirect: '/userinfo/info',
           children: [
-            { path: '/userinfo/info', name: '个人信息', component: () => import('@/views/userinfo/index.vue') }
+            {
+              path: '/userinfo/info',
+              name: '个人信息',
+              component: () => import('@/views/userinfo/index.vue')
+            }
           ]
+        },
+        {
+          path: '/distance',
+          name: '距离查询',
+          component: () => import('@/views/distance/index.vue')
+        },
+        {
+          path: '/material',
+          name: '物资管理',
+          component: () => import('@/views/material/index.vue')
         }
       ]
     }
