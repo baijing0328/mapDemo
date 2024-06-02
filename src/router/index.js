@@ -14,10 +14,10 @@ const router = createRouter({
         {
           path: '/userinfo',
           name: '用户信息',
-          redirect: '/userinfo/info',
+          redirect: '/userinfo/information',
           children: [
             {
-              path: '/userinfo/info',
+              path: '/userinfo/information',
               name: '个人信息',
               component: () => import('@/views/userinfo/index.vue')
             }
@@ -28,7 +28,7 @@ const router = createRouter({
           name: '距离',
           redirect: '/distance/query',
           children: [
-            { path: '/distance/query', name: '查询', component: () => import('@/views/distance/index.vue') },
+            { path: '/distance/query', name: '距离查询', component: () => import('@/views/distance/index.vue') },
             { path: '/distance/map', name: '地图展示', component: () => import('@/views/distance/DistanceMap.vue') },
           ],
         },
@@ -38,9 +38,9 @@ const router = createRouter({
           component: () => import('@/views/material/index.vue')
         },
         {
-          path: '/user/profile',
-          name: '个人信息',
-          component: () => import('@/views/userinfo/UserProfile.vue')
+          path: '/profile',
+          name: '个人资料',
+          component: () => import('@/views/profile/UserProfile.vue')
         }
       ]
     }
