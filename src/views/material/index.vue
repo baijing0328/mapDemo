@@ -89,10 +89,10 @@ provide('material-table-load', load)
         <!--      操作栏-->
         <el-table-column label="操作">
           <template #default="scope">
-            <el-button icon="Edit" type="primary" @click="handleEdit(scope.row)"></el-button>
+            <el-button @click="handleEdit(scope.row)">编辑</el-button>
             <el-popconfirm title="确认删除？" @confirm="handleDelete(scope.row.id)">
               <template #reference>
-                <el-button icon="Delete" type="danger"></el-button>
+                <el-button type="danger">删除</el-button>
               </template>
             </el-popconfirm>
           </template>

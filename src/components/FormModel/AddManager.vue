@@ -101,7 +101,7 @@ const save = (formEl) => {
     if (!valid) return
     try {
       const res: any = await addUserService(form.value)
-      if (res.code === '0') {
+      if (res.data.code === '0') {
         ElMessage({
           message: '添加成功',
           type: 'success'

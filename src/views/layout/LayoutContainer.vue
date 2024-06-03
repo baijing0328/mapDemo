@@ -8,7 +8,7 @@ const userStore = useUserStore()
 const router = useRouter()
 onMounted(() => {
   userStore.getUser()
-  console.log(router.currentRoute.value)
+  userStore.getIdentity()
 })
 const handleCommand = async (key) => {
   if (key === 'logout') {
@@ -21,7 +21,7 @@ const handleCommand = async (key) => {
     userStore.setUser({})
     router.push('/login')
   } else {
-    router.push(`/user/${key}`)
+    router.push(`/${key}`)
   }
 }
 </script>
@@ -37,11 +37,7 @@ const handleCommand = async (key) => {
         text-color="#fff"
         router
       >
-        <!-- <el-menu-item index="/home">
-          <el-icon><House /></el-icon>
-          <span>主页</span>
-        </el-menu-item> -->
-        <el-sub-menu index="/userinfo">
+        <el-sub-menu index="/userinfo" v-if="userStore.identity !== 'stu'">
           <template #title>
             <el-icon><UserFilled /></el-icon>
             <span>用户管理</span>
@@ -50,7 +46,7 @@ const handleCommand = async (key) => {
             <el-icon><User /></el-icon>
             <span>用户信息</span>
           </el-menu-item>
-          <el-menu-item index="/userinfo/manage">
+          <el-menu-item index="/userinfo/manage" v-if="userStore.identity === 'admin'">
             <el-icon><Crop /></el-icon>
             <span>管理者信息</span>
           </el-menu-item>

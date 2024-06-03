@@ -85,7 +85,7 @@ const iconStyle = computed(() => {
             性别
           </div>
         </template>
-        <el-tag type="primary">{{ userStore.user?.gender === 'male' ? '男' : '女' }}</el-tag>
+        <el-tag type="primary">{{ userStore.user?.gender }}</el-tag>
       </el-descriptions-item>
       <el-descriptions-item>
         <template #label>
@@ -143,7 +143,7 @@ const iconStyle = computed(() => {
             邮箱
           </div>
         </template>
-        {{ userStore.user?.email }}
+        {{ userStore.user?.email || '-' }}
       </el-descriptions-item>
     </el-descriptions>
   </el-card>

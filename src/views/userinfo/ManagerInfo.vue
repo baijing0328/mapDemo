@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, provide } from 'vue'
 import { ElMessage } from 'element-plus'
-import { userInfoFindService, deleteUserService } from '@/api/userinfo'
+import { findManagerService, deleteManagerService } from '@/api/userinfo'
 const tableData = ref([])
 const currentPage = ref(1)
 const pageSize = ref(10)
@@ -22,13 +22,13 @@ const filterTag = (value, row) => {
 const load = async () => {
   loading.value = true
   try {
-    const res = await userInfoFindService({
-      page: currentPage.value,
-      size: pageSize.value,
-      name: search.value
+    const res = await findManagerService({
+      pageNum: currentPage.value,
+      pageSize: pageSize.value,
+      search: search.value
     })
-    tableData.value = res.data.records
-    total.value = res.data.total
+    tableData.value = res.data.data.records
+    total.value = res.data.data.total
   } finally {
     loading.value = false
   }
@@ -39,7 +39,7 @@ const reset = () => {
 }
 provide('tableReload', load())
 const handleDelete = async (username) => {
-  const res: any = await deleteUserService(username)
+  const res: any = await deleteManagerService(username)
   if (res.code === '0') {
     ElMessage({
       message: '删除成功',
@@ -90,12 +90,10 @@ const handleDelete = async (username) => {
         />
         <el-table-column label="操作">
           <template #default="scope">
-            <el-button link type="primary" size="small" @click="handleEdit(scope.row)">
-              Detail
-            </el-button>
+            <el-button @click="handleEdit(scope.row)"> 编辑 </el-button>
             <el-popconfirm title="确认删除？" @confirm="handleDelete(scope.row.username)">
               <template #reference>
-                <el-button icon="Delete" type="danger"></el-button>
+                <el-button type="danger">删除</el-button>
               </template>
             </el-popconfirm>
           </template>

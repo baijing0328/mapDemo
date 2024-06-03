@@ -5,7 +5,7 @@ import { userUpdateService } from '@/api/user'
 const userStore = useUserStore()
 const dialogVisible = ref(false)
 const formModel = ref({
-  username: 'nihao',
+  username: userStore.user.username,
   name: userStore.user.name,
   gender: userStore.user.gender,
   age: userStore.user.age,
@@ -74,8 +74,8 @@ const resetForm = (formEl) => {
       </el-form-item>
       <el-form-item label="性别" prop="gender">
         <el-radio-group v-model="formModel.gender">
-          <el-radio label="男" value="male"></el-radio>
-          <el-radio label="女" value="female"></el-radio>
+          <el-radio label="男" value="男"></el-radio>
+          <el-radio label="女" value="女"></el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="年龄" prop="age">
