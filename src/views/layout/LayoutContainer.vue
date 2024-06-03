@@ -37,10 +37,10 @@ const handleCommand = async (key) => {
         text-color="#fff"
         router
       >
-        <el-menu-item index="/home">
+        <!-- <el-menu-item index="/home">
           <el-icon><House /></el-icon>
           <span>主页</span>
-        </el-menu-item>
+        </el-menu-item> -->
         <el-sub-menu index="/userinfo">
           <template #title>
             <el-icon><UserFilled /></el-icon>

@@ -8,18 +8,23 @@ const router = createRouter({
       path: '/',
       name: '首页',
       component: () => import('@/views/layout/LayoutContainer.vue'),
-      redirect: '/home',
+      redirect: '/userinfo',
       children: [
-        { path: '/home', name: '首页', component: () => import('@/views/home/HomePage.vue') },
+        // { path: '/home', name: '首页', component: () => import('@/views/home/HomePage.vue') },
         {
           path: '/userinfo',
-          name: '用户信息',
+          name: '用户管理',
           redirect: '/userinfo/information',
           children: [
             {
               path: '/userinfo/information',
-              name: '个人信息',
+              name: '用户信息',
               component: () => import('@/views/userinfo/index.vue')
+            },
+            {
+              path: '/userinfo/manage',
+              name: '管理员信息',
+              component: () => import('@/views/userinfo/ManagerInfo.vue')
             }
           ]
         },

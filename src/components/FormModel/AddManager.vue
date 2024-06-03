@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { ref, nextTick, inject } from 'vue'
+import { ref, inject } from 'vue'
 import { ElMessage } from 'element-plus'
 import { addUserService } from '@/api/userinfo'
 const load = () => inject('tableReload')
 const showpassword = ref(true)
-const judgeAddOrEdit = ref(true)
 
 const editJudge = ref(true)
 const disabled = ref(false)
@@ -17,8 +16,27 @@ const form = ref({
   age: '',
   gender: '',
   password: '',
-  checkPass: ''
+  checkPass: '',
+  phoneNum: '',
+  email: ''
 })
+const checkPhone = (rule, value, callback) => {
+  const phoneReg = /^1[3|4|5|6|7|8][0-9]{9}$/
+  if (!value) {
+    return callback(new Error('电话号码不能为空'))
+  }
+  setTimeout(() => {
+    if (!Number.isInteger(+value)) {
+      callback(new Error('请输入数字值'))
+    } else {
+      if (phoneReg.test(value)) {
+        callback()
+      } else {
+        callback(new Error('电话号码格式不正确'))
+      }
+    }
+  }, 100)
+}
 const checkPass = (rule, value, callback) => {
   if (editJudge.value) {
     if (value == '') {
@@ -71,7 +89,9 @@ const rules = {
   checkPass: [
     { required: true, message: '请再次输入密码', trigger: 'blur' },
     { validator: checkPass, trigger: 'blur' }
-  ]
+  ],
+  phoneNum: [{ required: true, validator: checkPhone, trigger: 'blur' }],
+  email: [{ type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }]
 }
 
 const save = (formEl) => {
@@ -135,6 +155,12 @@ const reset = (formEl) => {
       <el-form-item label="性别" prop="gender">
         <el-radio v-model="form.gender" label="男">男</el-radio>
         <el-radio v-model="form.gender" label="女">女</el-radio>
+      </el-form-item>
+      <el-form-item label="手机号" prop="phoneNum">
+        <el-input v-model.number="form.phoneNum" style="width: 80%"></el-input>
+      </el-form-item>
+      <el-form-item label="邮箱" prop="email">
+        <el-input v-model.number="form.email" style="width: 80%"></el-input>
       </el-form-item>
     </el-form>
     <template #footer>
