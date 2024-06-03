@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { userGetInfoService } from '@/api/user'
 
 export const useUserStore = defineStore('user', () => {
-  const token = ref('1111')
+  const token = ref('')
   const setToken = (newToken) => {
     token.value = newToken
   }
@@ -11,14 +11,7 @@ export const useUserStore = defineStore('user', () => {
     token.value = ''
   }
 
-  const user = ref<any>({
-    username: 'test',
-    name: 'wl',
-    gender: 'male',
-    age: 21,
-    phoneNum: '15005311949',
-    email: 'baijing.w@bupt.edu.cn'
-  })
+  const user = ref<any>({})
   const getUser = async () => {
     const res = await userGetInfoService()
     user.value = res.data.data

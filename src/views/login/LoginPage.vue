@@ -2,19 +2,16 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { Picture as IconPicture } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/user'
 import { userLoginService } from '@/api/user'
 const userStore = useUserStore()
 const router = useRouter()
-const identity = ref('')
 const form = ref()
 const formModel = ref({
   username: '',
   password: '',
   identity: ''
 })
-const url = '@/assets/images/login_Team.png'
 const rules = {
   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
@@ -27,8 +24,10 @@ const disabled = computed(() => {
 
 const login = async () => {
   await form.value.validate()
+  console.log(formModel.value)
   const res = await userLoginService(formModel.value)
   userStore.setToken(res.data.token)
+  userStore.setUser(res.data.data)
   ElMessage.success('登录成功')
   router.push('/')
 }

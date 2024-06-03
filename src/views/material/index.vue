@@ -10,20 +10,29 @@ const search = ref('')
 const loading = ref(false)
 const handleSizeChange = (val) => {
   pageSize.value = val
+  load()
 }
 const handleCurrentChange = (val) => {
   currentPage.value = val
+  load()
 }
 const load = async () => {
   loading.value = true
   try {
-    const res = await materialGetListService({
-      page: currentPage.value,
-      size: pageSize.value,
-      name: search.value
-    })
-    tableData.value = res.data.records
-    total.value = res.data.total
+    const params: {
+      pageNum: number
+      pageSize: number
+      search?: string
+    } = {
+      pageNum: currentPage.value,
+      pageSize: pageSize.value
+    }
+    if (search.value) {
+      params.search = search.value
+    }
+    const res = await materialGetListService(params)
+    tableData.value = res.data.data.records
+    total.value = res.data.data.total
   } finally {
     loading.value = false
   }
@@ -34,7 +43,7 @@ const reset = () => {
 }
 const handleDelete = async (id) => {
   const res: any = await materialDeleteService(id)
-  if (res.code === '0') {
+  if (res.data.data.code === '0') {
     ElMessage({
       message: '删除成功',
       type: 'success'

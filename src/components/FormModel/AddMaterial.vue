@@ -26,7 +26,7 @@ const commitForm = (formEl) => {
   formEl.validate(async (valid) => {
     if (valid) {
       const res: any = await materialAddService(formModel.value)
-      if (res.code === '0') {
+      if (res.data.code === '0') {
         dialogVisible.value = false
         resetForm(formEl)
         load()

@@ -1,10 +1,11 @@
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { cityList } from '@/utils/index'
+import { findDistanceService, deleteDistanceService } from '@/api/distance'
 const columns = [
   {
-    prop: 'username',
+    prop: 'locationname',
     label: '地名'
   },
   ...cityList
@@ -13,13 +14,46 @@ const currentPage = ref(1)
 const pageSize = ref(10)
 const total = ref(0)
 const search = ref('')
-
+const tableData = ref([])
+const loading = ref(false)
+const load = async () => {
+  loading.value = true
+  try {
+    const params = {
+      pageNum: currentPage.value,
+      pageSize: pageSize.value
+    }
+    if (search.value) {
+      params.search = search.value
+    }
+    const { data } = await findDistanceService(params)
+    tableData.value = data.data.records
+    total.value = data.data.total
+  } finally {
+    loading.value = false
+  }
+}
 const handleSizeChange = (val) => {
   pageSize.value = val
+  load()
 }
 const handleCurrentChange = (val) => {
   currentPage.value = val
+  load()
 }
+const handleDelete = async (row) => {
+  const res = await deleteDistanceService(row.id)
+  console.log(res)
+  if (res.data.code === 0) {
+    ElMessage.success('删除成功')
+    load()
+  } else {
+    ElMessage.error('删除失败')
+  }
+}
+onMounted(() => {
+  load()
+})
 </script>
 <template>
   <el-card>
@@ -34,14 +68,14 @@ const handleCurrentChange = (val) => {
         />
         <el-button icon="Search" style="margin-left: 5px" type="primary" @click="load" />
         <el-button icon="refresh-left" style="margin-left: 10px" type="default" @click="reset" />
-        <div style="float: right">
+        <!-- <div style="float: right">
           <el-tooltip content="添加" placement="top">
             <el-button icon="plus" style="width: 50px" type="primary" @click="add"></el-button>
           </el-tooltip>
-        </div>
+        </div> -->
       </div>
 
-      <el-table :data="tableData" style="width: 100%">
+      <el-table :data="tableData" style="width: 100%" v-loading="loading">
         <el-table-column label="#" type="index" fixed />
         <el-table-column
           v-for="item in columns"
@@ -49,14 +83,12 @@ const handleCurrentChange = (val) => {
           :label="item.label"
           :prop="item.prop"
           :fixed="item.prop === 'username'"
+          :width="item.width || 'auto'"
         />
 
-        <el-table-column label="操作" fixed="right" width="150">
+        <el-table-column label="操作" fixed="right" width="75">
           <template #default="scope">
-            <el-button link type="primary" size="small" @click="handleEdit(scope.row)">
-              Detail
-            </el-button>
-            <el-popconfirm title="确认删除？" @confirm="handleDelete(scope.row.username)">
+            <el-popconfirm title="确认删除？" @confirm="handleDelete(scope.row)">
               <template #reference>
                 <el-button icon="Delete" type="danger"></el-button>
               </template>
@@ -64,16 +96,20 @@ const handleCurrentChange = (val) => {
           </template>
         </el-table-column>
       </el-table>
-
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="currentPage"
-        :page-sizes="[10, 20, 30, 40]"
-        :page-size="pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      />
+      <el-row>
+        <el-col :span="12"></el-col>
+        <el-col :span="12">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[10, 20, 30, 40]"
+            :page-size="pageSize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          />
+        </el-col>
+      </el-row>
     </el-space>
   </el-card>
 </template>
