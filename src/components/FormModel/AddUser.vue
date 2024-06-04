@@ -110,7 +110,7 @@ const reset = (formEl) => {
 <template>
   <el-button style="width: 100px" type="primary" @click="dialogVisible = true">增加用户</el-button>
 
-  <el-dialog v-model="dialogVisible" title="操作" width="30%" @close="dialogVisible = false">
+  <el-dialog v-model="dialogVisible" title="操作" width="40%" @close="dialogVisible = false">
     <el-form ref="formRef" :model="form" :rules="rules" label-width="120px">
       <el-form-item label="账号" prop="username">
         <el-input v-model="form.username" style="width: 80%"></el-input>

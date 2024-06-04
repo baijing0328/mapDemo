@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, inject } from 'vue'
 import { ElMessage } from 'element-plus'
-import { addUserService } from '@/api/userinfo'
+import { addManagerService } from '@/api/userinfo'
 const load = () => inject('tableReload')
 const showpassword = ref(true)
 
@@ -100,7 +100,7 @@ const save = (formEl) => {
   formEl.validate(async (valid) => {
     if (!valid) return
     try {
-      const res: any = await addUserService(form.value)
+      const res: any = await addManagerService(form.value)
       if (res.data.code === '0') {
         ElMessage({
           message: '添加成功',
