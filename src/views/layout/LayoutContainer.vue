@@ -37,6 +37,14 @@ const handleCommand = async (key) => {
         text-color="#fff"
         router
       >
+        <el-menu-item index="/distance">
+          <el-icon><Search /></el-icon>
+          <span>距离查询</span>
+        </el-menu-item>
+        <el-menu-item index="/material">
+          <el-icon><Van /></el-icon>
+          <span>物资管理</span>
+        </el-menu-item>
         <el-sub-menu index="/userinfo" v-if="userStore.identity !== 'stu'">
           <template #title>
             <el-icon><UserFilled /></el-icon>
@@ -51,24 +59,6 @@ const handleCommand = async (key) => {
             <span>管理者信息</span>
           </el-menu-item>
         </el-sub-menu>
-        <el-sub-menu index="/distance">
-          <template #title>
-            <el-icon><Position /></el-icon>
-            <span>距离</span>
-          </template>
-          <el-menu-item index="/distance/query">
-            <el-icon><Search /></el-icon>
-            <span>距离查询</span>
-          </el-menu-item>
-          <el-menu-item index="/distance/map">
-            <el-icon><MapLocation /></el-icon>
-            <span>地图展示</span>
-          </el-menu-item>
-        </el-sub-menu>
-        <el-menu-item index="/material">
-          <el-icon><Van /></el-icon>
-          <span>物资管理</span>
-        </el-menu-item>
         <el-menu-item index="/profile">
           <el-icon><User /></el-icon>
           <span>个人资料</span>

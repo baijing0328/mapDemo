@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { ref, nextTick, inject } from 'vue'
+import { ref, defineEmits } from 'vue'
 import { ElMessage } from 'element-plus'
 import { addUserService } from '@/api/userinfo'
-const load = () => inject('tableReload')
+const emit = defineEmits(['userReload'])
 const showpassword = ref(true)
-const judgeAddOrEdit = ref(true)
 
 const editJudge = ref(true)
 const disabled = ref(false)
@@ -73,7 +72,9 @@ const rules = {
     { validator: checkPass, trigger: 'blur' }
   ]
 }
-
+const load = () => {
+  emit('userReload')
+}
 const save = (formEl) => {
   if (!formEl) return
   //验证表单

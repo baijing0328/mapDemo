@@ -51,6 +51,9 @@ const handleDelete = async (row) => {
     ElMessage.error('删除失败')
   }
 }
+const mapShow = () => {
+  window.open('https://www.bilibili.com/')
+}
 onMounted(() => {
   load()
 })
@@ -68,11 +71,9 @@ onMounted(() => {
         />
         <el-button icon="Search" style="margin-left: 5px" type="primary" @click="load" />
         <el-button icon="refresh-left" style="margin-left: 10px" type="default" @click="reset" />
-        <!-- <div style="float: right">
-          <el-tooltip content="添加" placement="top">
-            <el-button icon="plus" style="width: 50px" type="primary" @click="add"></el-button>
-          </el-tooltip>
-        </div> -->
+        <div style="float: right">
+          <el-button type="primary" @click="mapShow()">地图展示</el-button>
+        </div>
       </div>
 
       <el-table :data="tableData" style="width: 100%" v-loading="loading">

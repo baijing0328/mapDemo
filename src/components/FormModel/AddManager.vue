@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { ref, inject } from 'vue'
+import { ref, defineEmits } from 'vue'
 import { ElMessage } from 'element-plus'
 import { addManagerService } from '@/api/userinfo'
-const load = () => inject('tableReload')
+const emit = defineEmits(['managerReload'])
 const showpassword = ref(true)
 
 const editJudge = ref(true)
@@ -93,7 +93,9 @@ const rules = {
   phoneNum: [{ required: true, validator: checkPhone, trigger: 'blur' }],
   email: [{ type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }]
 }
-
+const load = () => {
+  emit('managerReload')
+}
 const save = (formEl) => {
   if (!formEl) return
   //验证表单

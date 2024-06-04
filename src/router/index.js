@@ -8,9 +8,8 @@ const router = createRouter({
       path: '/',
       name: '首页',
       component: () => import('@/views/layout/LayoutContainer.vue'),
-      redirect: '/userinfo',
+      redirect: '/distance',
       children: [
-        // { path: '/home', name: '首页', component: () => import('@/views/home/HomePage.vue') },
         {
           path: '/userinfo',
           name: '用户管理',
@@ -31,11 +30,7 @@ const router = createRouter({
         {
           path: '/distance',
           name: '距离',
-          redirect: '/distance/query',
-          children: [
-            { path: '/distance/query', name: '距离查询', component: () => import('@/views/distance/index.vue') },
-            { path: '/distance/map', name: '地图展示', component: () => import('@/views/distance/DistanceMap.vue') },
-          ],
+          component: () => import('@/views/distance/index.vue')
         },
         {
           path: '/material',

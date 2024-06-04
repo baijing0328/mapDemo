@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, provide } from 'vue'
+import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { Edit } from '@element-plus/icons-vue'
 import { userInfoFindService, deleteUserService } from '@/api/userinfo'
@@ -105,7 +105,6 @@ const reset = () => {
   search.value = ''
   load()
 }
-provide('tableReload', load())
 const handleDelete = async (username) => {
   const res: any = await deleteUserService(username)
   if (res.data.data.code === '0') {
@@ -165,6 +164,9 @@ const close = (formEl) => {
     edit.value = false
   }, 100)
 }
+onMounted(() => {
+  load()
+})
 </script>
 <template>
   <el-card>
@@ -180,7 +182,7 @@ const close = (formEl) => {
         <el-button icon="Search" style="margin-left: 5px" type="primary" @click="load" />
         <el-button icon="refresh-left" style="margin-left: 10px" type="default" @click="reset" />
         <div style="float: right">
-          <form-index type="user" />
+          <add-user @userReload="load" />
         </div>
       </div>
 

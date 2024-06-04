@@ -202,7 +202,7 @@ const confirm = async (formEl) => {
         <el-button icon="Search" style="margin-left: 5px" type="primary" @click="load" />
         <el-button icon="refresh-left" style="margin-left: 10px" type="default" @click="reset" />
         <div style="float: right">
-          <add-manager />
+          <add-manager @managerReload="load" />
         </div>
       </div>
 

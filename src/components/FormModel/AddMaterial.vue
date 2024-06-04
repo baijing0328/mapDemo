@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { ref, inject } from 'vue'
+import { ref, defineEmits } from 'vue'
 import { ElMessage } from 'element-plus'
 import { materialAddService } from '@/api/material'
 const formRef = ref(null)
 const dialogVisible = ref(false)
-const load = () => inject('material-table-load')
+const emit = defineEmits(['matrialReload'])
 const formModel = ref({
   id: '',
   category: '',
@@ -16,6 +16,9 @@ const rules = {
   category: [{ required: true, message: '请输入物资种类', trigger: 'blur' }],
   depot: [{ required: true, message: '请输入仓库位置', trigger: 'blur' }],
   quantity: [{ required: true, message: '请输入数量', trigger: 'blur' }]
+}
+const load = () => {
+  emit('matrialReload')
 }
 const resetForm = (formEl) => {
   if (!formEl) return
